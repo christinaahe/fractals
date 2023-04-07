@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html> 
+
+<head>
+    <meta charset=utf-8/>
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <script src="js/d3.v6.1.1/d3.min.js"></script>
+    <script src="js/hexagon.js"></script>
+    <title>Fractals</title>
+</head>
+
+
+<body>
+
+    <h1 class="centered">Simple Fractals</h1>
+    <!-- TRI -->
+    <div>
+        <h2>Triangle Fractal</h2>
+        <div class="flex">
+            <div id="fractal1" class="col1">
+                <button type="button" id="addTriLayer"  onclick="addTriLayer()">Add Dimension</button>
+                <button type="button" id="resetTri"  onclick="resetTri()">Reset</button>
+            </div>
+            <div class="col2">
+                <div id="triTextDiv">N = 1</div>
+                
+            </div>
+        </div>
+    
+    </div>
+    <!-- HEX -->
+    <div>
+        <h2>Hexagon Fractal</h2>
+        <div class="flex">
+            <div id="fractal2" class="col1">
+                <button type="button" id="addHexLayer"  onclick="addHexLayer()">Add Dimension</button>
+                <button type="button" id="resetHex"  onclick="resetHex()">Reset</button>
+            </div>
+            <div class="col2">
+                <div id="hexTextDiv">N = 1</div>
+                
+            </div>
+        </div>
+    </div>
+
+    <h3 class="centered">Acknowledgements</h3>
+    <div>
+        <ul>
+            <li><a href = "https://gist.github.com/captainhead/b542212d5f11e50f2ccaa47a71deb6c7">D3 Hexagon Symbol</a></li>
+        </ul>
+    </div>
+
+
+<script src="main.js"></script>
+
+</body>
+
+</html>
