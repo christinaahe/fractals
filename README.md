@@ -1,3 +1,3 @@
 # Simple Fractals
 
-Link to View Page: [https://christinaahe.github.io/simplefractals/s]
+[https://christinaahe.github.io/simplefractals/s](Link to View Page)
