@@ -11,8 +11,7 @@
 
 
 <body>
-
-    <h1 class="centered">Fractals</h1>
+    <h1 class="centered">Fractals<br><small>Christina He</small></h1>
     <h2>Overview</h2>
     <div>The term fractal was first coined by Benoît Mandelbrot who defined a fractal as "a rough or fragmented
         geometric shape that can be subdivided in parts, each of which is (at least approximately) a reduced-size
@@ -26,13 +25,13 @@
         is calculated by dividing the logarithm of the number of self-similar pieces the figure has (N) by the
         logarithm of the recipricol of the dilation factor (r). This formula seems random, but by applying
         it to simpler figures, we can see the logic.<br>We know that a line is one dimensional, ie. has a
-        dimension of 1. If we take a line and split it into <b>N</b> self-similar
-        pieces, the dilation factor would be <b>1/N</b>. These pieces are self-similar simply if they are of equal
-        length. If the original line is of length 1, the self-similar pieces are of length 1/N. Applying the dimension
-        formula, we get:<br>&emsp;&emsp;dimension = log(N) / log(N) = 1.<br>We know that polygons are two dimensional.
+        dimension of 1. If we take a line and split it into <b>x</b> self-similar
+        pieces, the dilation factor would be <b>1/x</b>. These pieces are self-similar simply if they are of equal
+        length. If the original line is of length 1, the self-similar pieces are of length 1/x. Applying the dimension
+        formula, we get:<br>&emsp;&emsp;dimension = log(N) / log(1/r) = log(x) / log(x) = 1<br>We know that polygons are two dimensional.
         If we take a square and split it into <b>4</b> self-similar squares, each square has a side length equal to
-        <b>1/2</b> the length of the original square. Applying the dimension formula, we get:<br>&emsp;&emsp;
-        dimension = log(4) / log(2) = log(2<sup>2</sup>) / log(2) = 2*log(2) / log(2) = 2.
+        <b>1/2</b> the length of the original square. Applying the dimension formula, we get:<br>&emsp;&emsp;dimension
+        = log(N) / log(1/r) = log(4) / log(2) = log(2<sup>2</sup>) / log(2) = 2*log(2) / log(2) = 2
     </div>
 
     <!-- TRI -->
@@ -52,7 +51,13 @@
                     equilateral triangle.<br>&emsp;2. Shrink the triangle by a factor of 1/2 (r = 1/2) and place
                     three of these triangles in each of the three vertices of the original triangle.<br>&emsp;3.
                     Repeat step 2 with each of the three newly placed triangles.<br>
-                    <br><strong>Click the <i>"Add Level"</i> button to simulate an iteration of this process!</strong>
+                    <br><strong>Click the <i>"Add Level"</i> button to simulate an iteration of this process!</strong><br>
+                    <br>Oftentimes, there is more than one way to think about how a fractal is made. Another process that
+                    creates this same fractal can be described as the following:<br>&emsp;1. Take an
+                    equilateral triangle.<br>&emsp;2. Divide the triangle into four smaller congruent triangles.
+                    Each smaller triangle should have a side length that is equal to half the original triangle.
+                    <br>&emsp;3. Remove the central triangle.<br>&emsp;4. Repeat steps 2 and 3 with each of the
+                    remaining three triangles.
                 </div>
                 
             </div>
@@ -86,11 +91,12 @@
     <div>
         <h2>Square Fractal</h2>
         <div class="flex">
-            <div id="fractal3" class="col1">
+            <div class="sq1">
+                <div id="fractal3"></div>
                 <button type="button" id="addSqLayer"  onclick="addSqLayer()">Add Level</button>
                 <button type="button" id="resetSq"  onclick="resetSq()">Reset</button>
             </div>
-            <div class="col2">
+            <div class="sq2">
                 <div id="sqTextDiv">N = 1</div>
                 <div><br>This square fractal can also be classified as self-similar. If we ignore the coloring of the
                     squares, the figure is an exact copy of the square rotated 45&#176 that is inscribed in the
@@ -99,9 +105,21 @@
                     square.<br>&emsp;2. Shrink the square by a factor of &#8730;2 / 2 (r =  &#8730;2 / 2), rotate
                     it clockwise 45&#176, and place it in the center of the original square.<br>&emsp;3.
                     Repeat step 2 with the new square.<br>
-                    <br><strong>Click the <i>"Add Level"</i> button to simulate an iteration of this process!</strong>
-                </div>
+                    <br><strong>Click the <i>"Add Level"</i> button on the left to simulate an iteration of this process!</strong><br>
                 
+                </div>
+                <div id="sq2TextDiv"><br>N = 1</div>
+                <div><br>Another way to think about this fractal is by considering the coloring as a part of the
+                    pattern. This process can be described as:<br>&emsp;1. Take a square and divide it into four
+                    purple triangles in each vertex and a white (or empty) rotated square in the center.
+                    <br>&emsp;2. Shrink the square by a factor of 1/2 (r =  1/2) and place it in the center of
+                    the original figure.<br>&emsp;3. Repeat step 2 with the new figure.<br>
+                    <br><strong>Click the <i>"Add Level"</i> button on the right to simulate an iteration of this process!</strong><br>
+                </div></div>
+            <div class="sq3">
+                <div id='fractal4'></div>
+                <button type="button" id="addSqLayer2"  onclick="addSqLayer2()">Add Level</button>
+                <button type="button" id="resetSq2"  onclick="resetSq2()">Reset</button>
             </div>
         </div>
     </div>

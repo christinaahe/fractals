@@ -18,3 +18,22 @@
 .centered {
     text-align: center;
 }
+
+small {
+    font-size: 18px;
+  }
+
+
+.sq1 {
+    float: left;
+    width: 33%;
+}
+
+.sq2 {
+    width: 33%;
+}
+
+.sq3 {
+    float: right;
+    width: 33%;
+}

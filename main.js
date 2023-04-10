@@ -332,3 +332,116 @@ document.getElementById('addSqLayer').addEventListener('click', clickSqDim);
 document.getElementById('resetSq').addEventListener('click', resetSqDim);
 
 
+const FRAME4 = d3.select("#fractal4")
+                  .append("svg")
+                    .attr("height", FRAME_HEIGHT)
+                    .attr("width", FRAME_WIDTH)
+                    .attr("class", "frame");
+
+
+function addSq2(sq, frame, color, rotate) {
+    let shape = d3.symbol()
+                    .size(sqArea(sq['s']))
+                    .type(d3.symbolSquare);
+    if (color) {
+        sqCol = color;
+    }
+    else {
+        sqCol = sq['color'];
+    }
+
+    if (rotate) {
+        sqTrans = "translate(" + sq['x'] + "," + sq['y'] + ") rotate(" + rotate + ")";
+    }
+    else {
+        sqTrans = "translate(" + sq['x'] + "," + sq['y'] + ")";
+    }
+    let sqId2 = 'sq2' + sqCount2.toString()
+    sqCount2++
+    frame.append('path')
+        .attr("d", shape)
+        .attr("id", sqId2)
+        .attr("stroke", sqCol)
+        .attr('fill', sqCol)
+        .attr('transform', sqTrans)
+}
+function addSqLayer1() {
+    let sq = squares2[0]
+    let margins = squares2[1]
+
+    let s = sq['s']
+    let smallS = Math.sqrt(2) * s/2
+    // squares
+    // top left
+    let sq1 = {'color': 'indigo', 's': smallS, 'x': sq['x'], 'y': sq['y']}
+    let sq1Offset = {x: (margins.x + smallS), y: margins.y}
+    let col = sq1['color']
+    if (sqLayers2 % 2 == 1) {
+        col = 'white'
+    }
+
+    addSq(sq1, FRAME4, col, 45*sqLayers)
+
+    squares2 = [sq1, sq1Offset]
+    sqLayers2 ++
+
+}
+function addSqLayer2() {
+    for (let i = 0; i < 2; i++) {
+        let sq = squares2[0]
+        let margins = squares2[1]
+
+        let s = sq['s']
+        let smallS = Math.sqrt(2) * s/2
+        // squares
+        // top left
+        let sq1 = {'color': 'indigo', 's': smallS, 'x': sq['x'], 'y': sq['y']}
+        let sq1Offset = {x: (margins.x + smallS), y: margins.y}
+        let col = sq1['color']
+        if (sqLayers2 % 2 == 1) {
+            col = 'white'
+        }
+
+        addSq2(sq1, FRAME4, col, 45*sqLayers2)
+
+        squares2 = [sq1, sq1Offset]
+        sqLayers2 ++
+    }
+
+}
+
+function resetSq2() {
+    for (let i = 0; i < sqCount2; i++) {
+        id = '#sq2' + i.toString()
+        FRAME4.select(id).remove()
+    }
+    sqCount2 = 0
+    sqLayers2 = 1
+    squares2 = [square2, squareOffset2]
+    addSq2(square2, FRAME4)
+    addSqLayer1()
+}
+
+let sqCount2 = 0
+let square2 = {'color': 'indigo', 'x': (FRAME_WIDTH/2), 'y': (FRAME_HEIGHT/2) , 's': VIS_WIDTH}
+let squareOffset2 = {x: MARGINS.left, y: MARGINS.top}
+let squares2 = [square, squareOffset]
+let sqLayers2 = 1
+addSq2(square2, FRAME4)
+addSqLayer1()
+
+
+function clickSqDim2() {
+    let dimension = Math.log(1) / Math.log(2)
+    let newText = "N = 1<br>r = 1/2<br>Dimension = " + dimension.toString();
+    let sq2TextDiv = document.getElementById("sq2TextDiv");
+    sq2TextDiv.innerHTML = newText
+}
+
+function resetSqDim2() {
+    let newText = "N = 1";
+    let sq2TextDiv = document.getElementById("sq2TextDiv");
+    sq2TextDiv.innerHTML = newText
+}
+document.getElementById('addSqLayer2').addEventListener('click', clickSqDim2);
+document.getElementById('resetSq2').addEventListener('click', resetSqDim2);
