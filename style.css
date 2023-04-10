@@ -7,12 +7,12 @@
 
 .col1 {
     float: left;
-    width: 60%;
+    width: 50%;
 }
 
 .col2 {
     float: right;
-    width: 40%;
+    width: 50%;
 }
 
 .centered {

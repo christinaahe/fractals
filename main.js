@@ -94,15 +94,15 @@ addTri(triangle, FRAME1)
 let triangles = [[triangle, triangleOffset]]
 
 function clickTriDim() {
-    let dimension = Math.log(triLayers) / Math.log(2)
-    let newText = "N = " + triLayers.toString() + "<br>r = 1/2<br>Dimension = " + dimension.toString();
+    let dimension = Math.log(3) / Math.log(2)
+    let newText = "N = 3<br>r = 1/2<br>Dimension = " + (Math.round(dimension*1000)/1000).toString();
     let triTextDiv = document.getElementById("triTextDiv");
     triTextDiv.innerHTML = newText
 }
 
 function resetTriDim() {
     let dimension = Math.log(triLayers) / Math.log(2)
-    let newText = "N = " + triLayers.toString() + "<br>r = 1/2<br>Dimension = " + dimension.toString();
+    let newText = "N = " + triLayers.toString();
     let triTextDiv = document.getElementById("triTextDiv");
     triTextDiv.innerHTML = newText
 }
@@ -143,7 +143,6 @@ function addHex(hex, frame, color, rotate) {
     frame.append('path')
         .attr("d", shape)
         .attr("id", hexId)
-        .attr("stroke", hexCol)
         .attr('fill', hexCol)
         .attr('transform', hexTrans)
 }
@@ -195,8 +194,9 @@ function addHexLayer() {
         addHex(hex4, FRAME2)
         addHex(hex5, FRAME2)
         addHex(hex6, FRAME2)
-
-        newHexagons.push([hex1, hex1Offset], [hex2, hex2Offset], [hex3, hex3Offset], [hex4, hex4Offset], [hex5, hex5Offset], [hex6, hex6Offset], [hex7, hex7Offset])
+        // addHex(hex7, FRAME2)
+        // , [hex7, hex7Offset]
+        newHexagons.push([hex1, hex1Offset], [hex2, hex2Offset], [hex3, hex3Offset], [hex4, hex4Offset], [hex5, hex5Offset], [hex6, hex6Offset])
       }
     hexLayers ++
     hexagons = newHexagons
@@ -222,19 +222,113 @@ let hexagons = [[hexagon, hexagonOffset]]
 let hexLayers = 1
 
 function clickHexDim() {
-    let dimension = Math.log(hexLayers) / Math.log(3)
-    let newText = "N = " + hexLayers.toString() + "<br>r = 1/2<br>Dimension = " + dimension.toString();
+    let dimension = Math.log(6) / Math.log(3)
+    let newText = "N = 6<br>r = 1/2<br>Dimension = " + (Math.round(dimension*1000)/1000).toString();
     let hexTextDiv = document.getElementById("hexTextDiv");
     hexTextDiv.innerHTML = newText
 }
 
 function resetHexDim() {
-    let dimension = Math.log(hexLayers) / Math.log(3)
-    let newText = "N = " + hexLayers.toString() + "<br>r = 1/3<br>Dimension = " + dimension.toString();
+    let newText = "N = " + hexLayers.toString();
     let hexTextDiv = document.getElementById("hexTextDiv");
     hexTextDiv.innerHTML = newText
 }
 document.getElementById('addHexLayer').addEventListener('click', clickHexDim);
 document.getElementById('resetHex').addEventListener('click', resetHexDim);
+
+
+// SQUARE
+
+const FRAME3 = d3.select("#fractal3")
+                  .append("svg")
+                    .attr("height", FRAME_HEIGHT)
+                    .attr("width", FRAME_WIDTH)
+                    .attr("class", "frame");
+
+function sqArea(s) {
+    return (s**2);
+}
+
+function addSq(sq, frame, color, rotate) {
+    let shape = d3.symbol()
+                    .size(sqArea(sq['s']))
+                    .type(d3.symbolSquare);
+    if (color) {
+        sqCol = color;
+    }
+    else {
+        sqCol = sq['color'];
+    }
+
+    if (rotate) {
+        sqTrans = "translate(" + sq['x'] + "," + sq['y'] + ") rotate(" + rotate + ")";
+    }
+    else {
+        sqTrans = "translate(" + sq['x'] + "," + sq['y'] + ")";
+    }
+    let sqId = 'sq' + sqCount.toString()
+    sqCount++
+    frame.append('path')
+        .attr("d", shape)
+        .attr("id", sqId)
+        .attr("stroke", sqCol)
+        .attr('fill', sqCol)
+        .attr('transform', sqTrans)
+}
+
+function addSqLayer() {
+    let sq = squares[0]
+    let margins = squares[1]
+
+    let s = sq['s']
+    let smallS = Math.sqrt(2) * s/2
+    // squares
+    // top left
+    let sq1 = {'color': 'indigo', 's': smallS, 'x': sq['x'], 'y': sq['y']}
+    let sq1Offset = {x: (margins.x + smallS), y: margins.y}
+    let col = sq1['color']
+    if (sqLayers % 2 == 1) {
+        col = 'white'
+    }
+
+    addSq(sq1, FRAME3, col, 45*sqLayers)
+
+    squares = [sq1, sq1Offset]
+    sqLayers ++
+
+}
+
+function resetSq() {
+    for (let i = 0; i < sqCount; i++) {
+        id = '#sq' + i.toString()
+        FRAME3.select(id).remove()
+    }
+    sqCount = 0
+    sqLayers = 1
+    addSq(square, FRAME3)
+    squares = [square, squareOffset]
+}
+
+let sqCount = 0
+let square = {'color': 'indigo', 'x': (FRAME_WIDTH/2), 'y': (FRAME_HEIGHT/2) , 's': VIS_WIDTH}
+let squareOffset = {x: MARGINS.left, y: MARGINS.top}
+addSq(square, FRAME3)
+let squares = [square, squareOffset]
+let sqLayers = 1
+
+function clickSqDim() {
+    let dimension = Math.log(1) / Math.log((2/Math.sqrt(2)))
+    let newText = "N = 1<br>r = &#8730;2 / 2<br>Dimension = " + dimension.toString();
+    let sqTextDiv = document.getElementById("sqTextDiv");
+    sqTextDiv.innerHTML = newText
+}
+
+function resetSqDim() {
+    let newText = "N = " + sqLayers.toString();
+    let sqTextDiv = document.getElementById("sqTextDiv");
+    sqTextDiv.innerHTML = newText
+}
+document.getElementById('addSqLayer').addEventListener('click', clickSqDim);
+document.getElementById('resetSq').addEventListener('click', resetSqDim);
 
 
